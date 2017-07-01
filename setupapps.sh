@@ -18,3 +18,31 @@ brew install $COMMON_APPS
 
 # The below command will install the application present in the Brewfile
 brew bundle install
+
+#============================
+# Post Install Postgres Steps
+#============================
+# Start Automatically on System Starup
+mkdir -p ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+
+# Optional: Install AdminPack for PgAdmin
+psql postgres -c 'CREATE EXTENSION "adminpack";'
+
+#================================
+# Installing Prezto - ZSH
+#================================
+zsh
+git clone --recursive https://github.com/kishorevaishnav/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+chsh -s /bin/zsh
+
+#=============================
+# Copy the .zshrc
+#=============================
+cp .zshrc ~/.zshrc
+cp .zpreztorc ~/.zpreztorc
