@@ -8,15 +8,17 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 done
 chsh -s /bin/zsh
 
+# getting the best prezto theme
 cd /tmp
 wget https://github.com/chauncey-garrett/zsh-prompt-garrett/archive/v1.0.zip
 unzip v1.0.zip
 cp zsh-prompt-garrett-1.0/prompt_garrett_setup  "${ZDOTDIR:-$HOME}"/.zprezto/modules/prompt/functions/.
 rm -rf v1.0.zip zsh-prompt-garrett-1.0
 
+# setting the best prezto theme
 cd -
 cp "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc_backup
-cp .zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc
+ln -s "`pwd`"/.zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc
 
 #==================
 # Install Homebrew
@@ -38,8 +40,8 @@ brew install ack autojump automake colordiff curl git git-flow hub icoutils imag
 
 # The below command will install the application present in the Brewfile
 brew bundle install
-#=============================
 
+#=============================
 # Post Install Postgres Steps
 #=============================
 # Start Automatically on System Starup
@@ -52,3 +54,23 @@ for db in $(psql -d postgres -c "SELECT datname FROM pg_database WHERE datistemp
   echo "Adding adminpack to ${db}"
   psql -c "CREATE EXTENSION adminpack;" ${db};
 done
+
+#=======================
+# Set git config values
+#=======================
+git config --global user.name "Kishore Kumar"
+git config --global user.email "kishorevaishnav@gmail.com"
+git config --global github.user kishorevaishnav
+git config --global core.editor "subl -w"
+git config --global color.ui true
+
+#===========================
+# Post Install Docker Steps
+#===========================
+docker-machine create --driver virtualbox default
+docker-machine ls
+eval $(docker-machine env default)
+
+
+# Installing the Package Manager for Sublime
+import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'

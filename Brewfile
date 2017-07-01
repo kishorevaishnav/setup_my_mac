@@ -9,6 +9,7 @@ brew 'postgres'
 
 cask 'firefox'
 cask 'flux'
+cask 'docker-toolbox'
 cask 'google-chrome'
 cask 'iterm2'
 cask 'pgadmin4'
