@@ -17,7 +17,7 @@ rm -rf v1.0.zip zsh-prompt-garrett-1.0
 
 # setting the best prezto theme
 cd -
-cp "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc_backup
+mv "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc_backup
 ln -s "`pwd`"/.zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc
 
 #==================
@@ -48,6 +48,7 @@ brew bundle install
 mkdir -p ~/Library/LaunchAgents
 ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+createuser postgres -s -d -i -r
 
 # Optional: Install AdminPack for PgAdmin
 for db in $(psql -d postgres -c "SELECT datname FROM pg_database WHERE datistemplate = false;" | sed '1,2d' | head -n 1 | grep -v '^ postgres$'); do
@@ -74,3 +75,5 @@ eval $(docker-machine env default)
 
 # Installing the Package Manager for Sublime
 import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
+#
+# --> parse error near `()' --> from the above command
