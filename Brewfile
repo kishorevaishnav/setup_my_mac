@@ -7,6 +7,7 @@ brew 'rbenv'
 brew 'ruby-build'
 brew 'postgres'
 brew 'elixir'
+brew 'exercism'
 
 cask 'firefox'
 cask 'flux'

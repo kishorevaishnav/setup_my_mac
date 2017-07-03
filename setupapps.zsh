@@ -1,24 +1,26 @@
 #=========================
 # Installing Prezto - ZSH
 #=========================
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-chsh -s /bin/zsh
+if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ] ; then
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  setopt EXTENDED_GLOB
+  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+  done
+  chsh -s /bin/zsh
 
-# getting the best prezto theme
-cd /tmp
-wget https://github.com/chauncey-garrett/zsh-prompt-garrett/archive/v1.0.zip
-unzip v1.0.zip
-cp zsh-prompt-garrett-1.0/prompt_garrett_setup  "${ZDOTDIR:-$HOME}"/.zprezto/modules/prompt/functions/.
-rm -rf v1.0.zip zsh-prompt-garrett-1.0
+  # getting the best prezto theme
+  cd /tmp
+  wget https://github.com/chauncey-garrett/zsh-prompt-garrett/archive/v1.0.zip
+  unzip v1.0.zip
+  cp zsh-prompt-garrett-1.0/prompt_garrett_setup  "${ZDOTDIR:-$HOME}"/.zprezto/modules/prompt/functions/.
+  rm -rf v1.0.zip zsh-prompt-garrett-1.0
 
-# setting the best prezto theme
-cd -
-mv "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc_backup
-ln -s "`pwd`"/.zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc
+  # setting the best prezto theme
+  cd -
+  mv "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc_backup
+  ln -s "`pwd`"/.zpreztorc "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/zpreztorc
+fi
 
 #==================
 # Install Homebrew
@@ -31,15 +33,18 @@ else
     brew update
 fi
 
-echo "Install Homebrew extension Caske"
-brew install caskroom/cask/brew-cask
+which -s brew
+if [[ $? == 0 ]] ; then
+  echo "Install Homebrew extension Caske"
+  brew install caskroom/cask/brew-cask
 
-COMMON_APPS="ack autojump automake colordiff curl git git-flow hub icoutils imagemagick libmemcached memcached openssl ossp-uuid qt readline redis tmux wget"
-echo "Install common applications via Homebrew --> $COMMON_APPS"
-brew install ack autojump automake colordiff curl git git-flow hub icoutils imagemagick libmemcached memcached openssl ossp-uuid qt readline redis tmux wget
+  COMMON_APPS="ack autojump automake colordiff curl git git-flow hub icoutils imagemagick libmemcached memcached openssl ossp-uuid qt readline redis tmux wget"
+  echo "Install common applications via Homebrew --> $COMMON_APPS"
+  brew install ack autojump automake colordiff curl git git-flow hub icoutils imagemagick libmemcached memcached openssl ossp-uuid qt readline redis tmux wget
 
-# The below command will install the application present in the Brewfile
-brew bundle install
+  # The below command will install the application present in the Brewfile
+  brew bundle install
+fi
 
 #=============================
 # Post Install Postgres Steps
