@@ -1,14 +1,15 @@
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 
-brew 'git'
-brew 'npm'
-brew 'rbenv'
-brew 'ruby-build'
-brew 'postgres'
 brew 'elixir'
 brew 'exercism'
+brew 'git'
+brew 'npm'
+brew 'postgres'
+brew 'rbenv'
+brew 'ruby-build'
 
+cask 'filezilla'
 cask 'firefox'
 cask 'flux'
 cask 'docker-toolbox'
@@ -20,6 +21,14 @@ cask 'sublime-text'
 cask 'virtualbox'
 cask 'visual-studio-code'
 cask 'vlc'
+
+cask 'xquartz'
+
+# The below line is very important for Dia to work on Mac
+# and its added at line no. 39 /Applications/Dia.app/Contents/Resources/bin/dia the .zshrc file.
+# http://navkirats.blogspot.de/2014/10/dia-diagram-mac-osx-yosemite-fix-i-use.html
+# export DISPLAY=:0
+cask 'dia'
 
 # cask 'gimp'
 # cask 'opera'
