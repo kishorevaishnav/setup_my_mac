@@ -9,6 +9,7 @@ brew 'postgres'
 brew 'rbenv'
 brew 'ruby-build'
 
+cask 'cyberduck'
 cask 'filezilla'
 cask 'firefox'
 cask 'flux'
