@@ -70,6 +70,11 @@ git config --global github.user kishorevaishnav
 git config --global core.editor "subl -w"
 git config --global color.ui true
 
+#==============
+# Update Heroku
+#==============
+heroku update
+
 #===========================
 # Post Install Docker Steps
 #===========================
