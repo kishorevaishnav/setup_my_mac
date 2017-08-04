@@ -1,9 +1,12 @@
+# Reference to refer: https://github.com/Homebrew/homebrew-bundle
+
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 
 brew 'elixir'
 brew 'exercism'
 brew 'git'
+brew 'go', args: ['--cross-compile-common']
 brew 'heroku-toolbelt'
 brew 'htop'
 brew 'npm'
@@ -34,16 +37,3 @@ cask 'xquartz'
 # http://navkirats.blogspot.de/2014/10/dia-diagram-mac-osx-yosemite-fix-i-use.html
 # export DISPLAY=:0
 cask 'dia'
-
-# cask 'gimp'
-# cask 'opera'
-# cask 'spectacle'
-# cask 'sequel-pro'
-
-# mas 'Slack', id: 803453959
-
-# mas 'Numbers', id: 409203825
-# mas 'Pages', id: 409201541
-# mas 'Sip', id: 507257563 
-# mas 'Simplenote', id: 692867256 
-# mas 'Todoist', id: 585829637
